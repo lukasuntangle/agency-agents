@@ -50,4 +50,5 @@ jobs:
           CHANGED_FILES: ${{ steps.changed.outputs.files }}
         run: |
           chmod +x scripts/lint-agents.sh
-          ./scripts/lint-agents.sh $CHANGED_FILES
+          # Use xargs to safely handle filenames with spaces/special chars
+          echo "$CHANGED_FILES" | xargs -d '\n' ./scripts/lint-agents.sh
